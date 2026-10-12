@@ -678,6 +678,13 @@ const LayoutFlow = () => {
             edgeTypes={edgeTypes}
             onConnect={onConnect}
             onNodeContextMenu={(event, node) => onContextMenu(event, node, 'node')}
+            onNodeDoubleClick={(event, node) => {
+              // same as the context menu's "View Details", which only exists for running elements
+              if (router.getElement(node.id) === undefined) return;
+              setContextMenu(null);
+              openModal(node.id);
+            }}
+            zoomOnDoubleClick={false}
             onEdgeContextMenu={(event, edge) => onContextMenu(event, edge, 'edge')}
             onPaneClick={onPaneClick}
             onDrop={onDrop}
